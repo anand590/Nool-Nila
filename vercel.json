@@ -1,8 +1,12 @@
 {
-  "buildCommand": "npm run build:shared && npm run build:web",
+  "buildCommand": "npm run build:vercel",
   "outputDirectory": "apps/web/dist",
   "framework": "vite",
   "rewrites": [
+    {
+      "source": "/api/(.*)",
+      "destination": "/api/index.js"
+    },
     {
       "source": "/(.*)",
       "destination": "/index.html"

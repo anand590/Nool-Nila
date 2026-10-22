@@ -13,9 +13,8 @@ export const prisma =
     log: process.env.NODE_ENV === 'development' ? ['warn', 'error'] : ['error'],
   });
 
-if (process.env.NODE_ENV !== 'production') {
-  globalThis.prismaGlobal = prisma;
-}
+// Cache PrismaClient on globalThis to prevent connection exhaustion in serverless environments
+globalThis.prismaGlobal = prisma;
 
 /**
  * Configure SQLite runtime pragmas for reliability:

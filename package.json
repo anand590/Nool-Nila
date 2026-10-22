@@ -15,6 +15,7 @@
     "build:api": "npm run build --workspace=@nool-and-nila/api",
     "build:web": "npm run build --workspace=@nool-and-nila/web",
     "build": "npm run build:shared && npm run build:api && npm run build:web",
+    "build:vercel": "npm run build:shared && npm run prisma:generate:pg && npm run build:api && npm run build:web",
     "start:api": "npm run start --workspace=@nool-and-nila/api",
     "preview:web": "npm run preview --workspace=@nool-and-nila/web",
     "start:prod": "concurrently \"npm run start:api\" \"npm run preview:web\"",
