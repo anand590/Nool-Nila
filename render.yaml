@@ -1,0 +1,37 @@
+databases:
+  - name: nool-and-nila-db
+    databaseName: nool_and_nila
+    user: nool_and_nila_user
+    plan: starter
+    region: singapore
+    ipAllowList: [] # Private connection within Render network
+
+services:
+  - type: web
+    name: nool-and-nila-api
+    runtime: node
+    plan: starter
+    region: singapore
+    buildCommand: npm install && npm run build:shared && npm run prisma:generate:pg --workspace=@nool-and-nila/api && npm run build:api
+    preDeployCommand: npm run prisma:migrate:pg --workspace=@nool-and-nila/api
+    startCommand: npm run start:api
+    healthCheckPath: /api/v1/health
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 5000
+      - key: DATABASE_URL
+        fromDatabase:
+          name: nool-and-nila-db
+          property: connectionString
+      - key: JWT_SECRET
+        generateValue: true
+      - key: COOKIE_SECRET
+        generateValue: true
+      - key: APP_URL
+        sync: false
+      - key: API_URL
+        sync: false
+      - key: WHATSAPP_BUSINESS_NUMBER
+        value: "919876543210"

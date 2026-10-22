@@ -1,0 +1,40 @@
+{
+  "name": "nool-and-nila",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Nool & Nila - Luxury Indian Saree Boutique Platform",
+  "workspaces": [
+    "packages/*",
+    "apps/*"
+  ],
+  "scripts": {
+    "dev:web": "npm run dev --workspace=@nool-and-nila/web",
+    "dev:api": "npm run dev --workspace=@nool-and-nila/api",
+    "dev": "concurrently \"npm run dev:api\" \"npm run dev:web\"",
+    "build:shared": "npm run build --workspace=@nool-and-nila/shared",
+    "build:api": "npm run build --workspace=@nool-and-nila/api",
+    "build:web": "npm run build --workspace=@nool-and-nila/web",
+    "build": "npm run build:shared && npm run build:api && npm run build:web",
+    "start:api": "npm run start --workspace=@nool-and-nila/api",
+    "preview:web": "npm run preview --workspace=@nool-and-nila/web",
+    "start:prod": "concurrently \"npm run start:api\" \"npm run preview:web\"",
+    "prisma:generate": "npm run prisma:generate --workspace=@nool-and-nila/api",
+    "prisma:generate:pg": "npm run prisma:generate:pg --workspace=@nool-and-nila/api",
+    "prisma:push": "npm run prisma:push --workspace=@nool-and-nila/api",
+    "prisma:migrate": "npm run prisma:migrate --workspace=@nool-and-nila/api",
+    "prisma:migrate:pg": "npm run prisma:migrate:pg --workspace=@nool-and-nila/api",
+    "prisma:migrate:status": "npm run prisma:migrate:status --workspace=@nool-and-nila/api",
+    "prisma:seed": "npm run prisma:seed --workspace=@nool-and-nila/api",
+    "db:migrate:sqlite-to-pg": "npm run db:migrate:sqlite-to-pg --workspace=@nool-and-nila/api --",
+    "staging:rehearsal": "npm run staging:rehearsal --workspace=@nool-and-nila/api",
+    "db:backup": "npm run db:backup --workspace=@nool-and-nila/api",
+    "db:restore": "npm run db:restore --workspace=@nool-and-nila/api",
+    "admin:recovery": "npm run admin:recovery --workspace=@nool-and-nila/api",
+    "test": "npm run test --workspaces --if-present",
+    "lint": "npm run lint --workspaces --if-present"
+  },
+  "devDependencies": {
+    "concurrently": "^9.1.2",
+    "typescript": "^5.7.3"
+  }
+}
