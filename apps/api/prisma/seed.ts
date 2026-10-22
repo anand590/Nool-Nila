@@ -13,8 +13,9 @@ async function main() {
 
   console.log('🌱 Starting Nool & Nila database seed...');
 
-  // 1. Clean up existing records in reverse dependency order
-  await prisma.orderStatusHistory.deleteMany();
+  if ('orderStatusHistory' in prisma) {
+    await (prisma as any).orderStatusHistory.deleteMany();
+  }
   await prisma.orderItem.deleteMany();
   await prisma.order.deleteMany();
   await prisma.inventoryMovement.deleteMany();
